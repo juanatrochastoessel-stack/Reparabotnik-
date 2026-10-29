@@ -75,9 +75,39 @@ section.gris .servicio{background:#fff}
 .nota-zona a{color:var(--azul);font-weight:600}
 
 /* Agenda + formulario */
-.agenda{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;background:var(--azul);color:#fff;border-radius:10px;padding:32px}
-.agenda h2{color:#fff}
-.agenda p{margin:0;max-width:44ch;color:#dbe7fb}
+  <section id="agendar" class="gris">
+    <div class="wrap">
+      <h2>Agendá tu visita técnica</h2>
+      <p class="intro">Elegí el día y horario que te quede cómodo. Te confirmamos por WhatsApp a la brevedad.</p>
+      <form name="visita" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="visita">
+        <p hidden><label>No completar: <input name="bot-field"></label></p>
+        <div class="fila">
+          <label>Nombre<input type="text" name="nombre" required autocomplete="name"></label>
+          <label>WhatsApp o teléfono<input type="tel" name="telefono" required autocomplete="tel"></label>
+        </div>
+        <div class="fila">
+          <label>Día
+            <input type="date" name="dia" id="dia" required>
+          </label>
+          <!-- EDITÁ ACÁ los horarios que realmente podés atender -->
+          <label>Horario
+            <select name="horario" required>
+              <option value="">Elegí un horario</option>
+              <option>16:30</option>
+              <option>17:00</option>
+              <option>17:30</option>
+              <option>18:00</option>
+            </select>
+          </label>
+        </div>
+        <label>Dirección (calle, altura y localidad)<input type="text" name="direccion" required autocomplete="street-address"></label>
+        <label>¿Qué equipo o problema tiene?<textarea name="problema" required></textarea></label>
+        <button class="btn btn-acento" type="submit">Pedir esta visita</button>
+      </form>
+      <p class="nota-zona">¿Preferís coordinar directo? <a href="https://wa.me/5491178282198?text=Hola%2C%20quiero%20agendar%20una%20visita%20t%C3%A9cnica." target="_blank" rel="noopener">Escribinos por WhatsApp</a>.</p>
+    </div>
+  </section>
 form{display:grid;gap:16px;max-width:620px}
 label{font-weight:600;display:grid;gap:6px}
 input,select,textarea{font:inherit;padding:12px;border:2px solid #b9c8e3;border-radius:6px;background:#fff;color:var(--texto)}
