@@ -68,6 +68,19 @@ section.gris .servicio{background:#fff}
 .foto img{width:100%;height:100%;object-fit:cover}
 
 /* Zona de cobertura */
+    /* Agenda: solo días hábiles y desde mañana */
+  var dia = document.getElementById('dia');
+  if (dia) {
+    var man = new Date(); man.setDate(man.getDate() + 1);
+    dia.min = man.toISOString().slice(0,10);
+    dia.addEventListener('change', function(){
+      var d = new Date(dia.value + 'T12:00:00').getDay();
+      if (d === 0 || d === 6) {   /* 0 = domingo, 6 = sábado */
+        alert('Atendemos de lunes a viernes. Elegí otro día, por favor.');
+        dia.value = '';
+      }
+    });
+  }
 #mapa{height:440px;border-radius:10px;border:2px solid #b9c8e3;z-index:1}
 .localidades{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .localidades li{background:var(--suave);color:var(--azul-osc);font-weight:600;font-size:15px;padding:6px 14px;border-radius:999px;border:1px solid #c9d8f0}
