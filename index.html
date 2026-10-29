@@ -4,10 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reparabotnik · Servicio técnico</title>
-<meta name="description" content="Servicio técnico de notebooks, PC, redes y electrónica. Agendá tu visita y pedí tu cotización online.">
+<meta name="description" content="Servicio técnico de notebooks, PC, redes y electrónica en CABA y zona oeste (hasta Caseros y Ramos Mejía). Agendá tu visita y pedí tu cotización online.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,600;0,800;1,800&display=swap" rel="stylesheet">
+<!-- Mapa (Leaflet + OpenStreetMap, gratis y sin clave) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{
   --azul:#0045A2;      /* azul del logo */
@@ -25,7 +27,7 @@ a{color:inherit}
 .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
 
 /* Barra superior */
-header{background:var(--azul);position:sticky;top:0;z-index:10}
+header{background:var(--azul);position:sticky;top:0;z-index:1000}
 .barra{display:flex;align-items:center;justify-content:space-between;height:68px}
 .barra img{height:44px;width:auto}
 nav ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;align-items:center}
@@ -65,6 +67,13 @@ section.gris .servicio{background:#fff}
 .foto{aspect-ratio:4/3;background:#d5e0f3;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;color:var(--azul-osc);font-size:15px;overflow:hidden}
 .foto img{width:100%;height:100%;object-fit:cover}
 
+/* Zona de cobertura */
+#mapa{height:440px;border-radius:10px;border:2px solid #b9c8e3;z-index:1}
+.localidades{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.localidades li{background:var(--suave);color:var(--azul-osc);font-weight:600;font-size:15px;padding:6px 14px;border-radius:999px;border:1px solid #c9d8f0}
+.nota-zona{margin:16px 0 0;font-size:15px}
+.nota-zona a{color:var(--azul);font-weight:600}
+
 /* Agenda + formulario */
 .agenda{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;background:var(--azul);color:#fff;border-radius:10px;padding:32px}
 .agenda h2{color:#fff}
@@ -79,6 +88,13 @@ textarea{min-height:120px;resize:vertical}
 footer{background:var(--azul-osc);color:#cfdcf4;padding:32px 0;font-size:15px}
 footer a{color:#fff}
 
+/* Botón flotante de WhatsApp */
+.wsp{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:1100;
+  width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.3);text-decoration:none;transition:transform .15s}
+.wsp:hover,.wsp:focus-visible{transform:scale(1.08);background:#1ebe5b}
+.wsp svg{width:34px;height:34px;fill:#fff}
+
 @media (max-width:760px){
   .hamb{display:block}
   nav{display:none;position:absolute;top:68px;left:0;right:0;background:var(--azul-osc);padding:8px 12px 16px}
@@ -89,8 +105,9 @@ footer a{color:#fff}
   .sub a:hover{background:rgba(255,255,255,.15)}
   .fila{grid-template-columns:1fr}
   .portada{padding:44px 0 52px}
+  #mapa{height:340px}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.wsp{transition:none}}
 </style>
 </head>
 <body>
@@ -113,6 +130,7 @@ footer a{color:#fff}
           </ul>
         </li>
         <li><a href="#trabajos">Trabajos</a></li>
+        <li><a href="#zona">Zona</a></li>
         <li><a href="#cotizar">Cotizar</a></li>
         <li><a href="#contacto">Contacto</a></li>
         <li><a class="boton-nav" href="#agendar">Agendar visita</a></li>
@@ -161,7 +179,26 @@ footer a{color:#fff}
     </div>
   </section>
 
-  <section id="agendar">
+  <section id="zona">
+    <div class="wrap">
+      <h2>Zona de atención</h2>
+      <p class="intro">Atendemos en toda la Ciudad de Buenos Aires y en zona oeste, hasta Caseros y Ramos Mejía, incluyendo las localidades del medio.</p>
+      <div id="mapa" role="img" aria-label="Mapa de la zona de atención: CABA y zona oeste hasta Caseros y Ramos Mejía"></div>
+      <!-- EDITÁ ACÁ la lista de localidades (también se muestra en el mapa) -->
+      <ul class="localidades">
+        <li>Ciudad de Buenos Aires</li>
+        <li>Ciudadela</li>
+        <li>Lomas del Mirador</li>
+        <li>Sáenz Peña</li>
+        <li>Santos Lugares</li>
+        <li>Caseros</li>
+        <li>Ramos Mejía</li>
+      </ul>
+      <p class="nota-zona">¿Tu zona no aparece? <a href="https://wa.me/5491178282198?text=Hola%2C%20quiero%20consultar%20si%20llegan%20a%20mi%20zona." target="_blank" rel="noopener">Escribinos por WhatsApp</a> y lo vemos.</p>
+    </div>
+  </section>
+
+  <section id="agendar" class="gris">
     <div class="wrap">
       <div class="agenda">
         <div>
@@ -174,7 +211,7 @@ footer a{color:#fff}
     </div>
   </section>
 
-  <section id="cotizar" class="gris">
+  <section id="cotizar">
     <div class="wrap">
       <h2>Pedí tu cotización</h2>
       <p class="intro">Contanos qué le pasa a tu equipo y te respondemos con un presupuesto.</p>
@@ -206,14 +243,20 @@ footer a{color:#fff}
 <footer id="contacto">
   <div class="wrap">
     <strong>Reparabotnik · Servicio técnico</strong><br>
-    <!-- Reemplazá estos datos por los tuyos -->
-    WhatsApp: <a href="https://wa.me/54911XXXXXXXX">+54 9 11 XXXX-XXXX</a><br>
-    Zona de atención: TU ZONA<br>
+    WhatsApp: <a href="https://wa.me/5491178282198" target="_blank" rel="noopener">+54 9 11 7828-2198</a><br>
+    Zona de atención: CABA y zona oeste (hasta Caseros y Ramos Mejía)<br>
     Horario: lunes a viernes de 9 a 18 hs
   </div>
 </footer>
 
+<!-- Botón flotante de WhatsApp -->
+<a class="wsp" href="https://wa.me/5491178282198?text=Hola%2C%20quiero%20consultar%20por%20una%20reparaci%C3%B3n." target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3C9.4 3 4 8.38 4 15.01c0 2.12.55 4.18 1.6 6L4 29l8.2-1.56a12.03 12.03 0 0 0 3.84.62C22.68 28.06 28 22.67 28 16.04 28 9.4 22.68 3 16.04 3zm0 22.04c-1.2 0-2.37-.2-3.48-.6l-.5-.18-4.87.93.95-4.74-.2-.52a9.96 9.96 0 0 1-1.54-5.32c0-5.5 4.5-9.97 10.04-9.97 5.5 0 9.97 4.47 9.97 9.97 0 5.52-4.47 10.43-9.97 10.43zm5.5-7.46c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15-.2.3-.78.98-.96 1.18-.18.2-.35.22-.65.08-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.64-.93-2.25-.25-.58-.5-.5-.68-.5l-.58-.01c-.2 0-.53.08-.8.38-.28.3-1.06 1.04-1.06 2.53 0 1.5 1.08 2.94 1.23 3.14.15.2 2.12 3.24 5.14 4.54.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.78-.73 2.03-1.43.25-.7.25-1.3.18-1.43-.08-.12-.28-.2-.58-.35z"/></svg>
+</a>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+  /* Menú del celular */
   var b=document.getElementById('hamb'), m=document.getElementById('menu');
   b.addEventListener('click',function(){
     var a=m.classList.toggle('abierto');
@@ -222,6 +265,51 @@ footer a{color:#fff}
   m.addEventListener('click',function(e){
     if(e.target.tagName==='A'){m.classList.remove('abierto');b.setAttribute('aria-expanded','false');}
   });
+
+  /* Mapa de cobertura (contorno aproximado: CABA + corredor oeste hasta Caseros y Ramos Mejía) */
+  if (window.L) {
+    var mapa = L.map('mapa', {scrollWheelZoom:false});
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom:18,
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(mapa);
+
+    var zona = L.polygon([
+      [-34.5335,-58.4690],
+      [-34.5600,-58.4000],
+      [-34.6050,-58.3560],
+      [-34.6400,-58.3500],
+      [-34.6600,-58.3800],
+      [-34.6700,-58.4300],
+      [-34.6850,-58.4750],
+      [-34.7020,-58.4980],
+      [-34.6800,-58.5300],
+      [-34.6650,-58.5800],
+      [-34.6150,-58.5850],
+      [-34.5900,-58.5750],
+      [-34.5700,-58.5250],
+      [-34.5500,-58.4900]
+    ], {color:'#0045A2', weight:3, fillColor:'#0045A2', fillOpacity:0.18}).addTo(mapa);
+    mapa.fitBounds(zona.getBounds(), {padding:[10,10]});
+
+    /* EDITÁ ACÁ los puntos: [nombre, latitud, longitud] */
+    [
+      ['CABA',-34.6037,-58.4300],
+      ['Ciudadela',-34.6375,-58.5375],
+      ['Lomas del Mirador',-34.6670,-58.5280],
+      ['Sáenz Peña',-34.6050,-58.5330],
+      ['Santos Lugares',-34.5990,-58.5420],
+      ['Caseros',-34.6090,-58.5620],
+      ['Ramos Mejía',-34.6410,-58.5660]
+    ].forEach(function(p){
+      L.circleMarker([p[1],p[2]], {radius:7, color:'#fff', weight:2, fillColor:'#F28C28', fillOpacity:1})
+        .addTo(mapa).bindTooltip(p[0], {permanent:true, direction:'right', offset:[8,0]});
+    });
+
+    /* El zoom con la rueda se activa recién al hacer clic en el mapa (para no trabar el scroll de la página) */
+    mapa.on('click', function(){ mapa.scrollWheelZoom.enable(); });
+    mapa.on('mouseout', function(){ mapa.scrollWheelZoom.disable(); });
+  }
 </script>
 </body>
 </html>
