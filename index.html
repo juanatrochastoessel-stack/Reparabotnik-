@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reparabotnik · Servicio técnico</title>
+<meta name="description" content="Servicio técnico de notebooks, PC, redes y electrónica. Agendá tu visita y pedí tu cotización online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,600;0,800;1,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#0045A2;      /* azul del logo */
+  --azul-osc:#00306F;
+  --acento:#F28C28;    /* botones importantes */
+  --texto:#222B38;
+  --suave:#EEF3FB;
+  --blanco:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;font-family:Figtree,system-ui,Arial,sans-serif;color:var(--texto);line-height:1.6;font-size:17px}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+/* Barra superior */
+header{background:var(--azul);position:sticky;top:0;z-index:10}
+.barra{display:flex;align-items:center;justify-content:space-between;height:68px}
+.barra img{height:44px;width:auto}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;align-items:center}
+nav a{color:#fff;text-decoration:none;padding:10px 14px;display:block;font-weight:600;border-radius:6px}
+nav a:hover,nav a:focus-visible{background:rgba(255,255,255,.15)}
+nav a.boton-nav{background:var(--acento);color:#1c1200}
+nav a.boton-nav:hover{background:#ffa040}
+.tiene-sub{position:relative}
+.sub{display:none;position:absolute;top:100%;left:0;min-width:270px;background:#fff;border-radius:8px;padding:6px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.sub a{color:var(--texto);font-weight:400}
+.sub a:hover,.sub a:focus-visible{background:var(--suave)}
+.tiene-sub:hover .sub,.tiene-sub:focus-within .sub{display:block}
+.hamb{display:none;background:none;border:0;color:#fff;font-size:30px;cursor:pointer;padding:6px 10px}
+
+/* Portada */
+.portada{background:var(--azul);color:#fff;padding:64px 0 72px}
+.portada h1{font-size:clamp(34px,6vw,58px);line-height:1.08;margin:0 0 16px;font-weight:800;font-style:italic;max-width:16ch}
+.portada p{font-size:19px;max-width:46ch;margin:0 0 28px;color:#dbe7fb}
+.botones{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 24px;border-radius:8px;font-weight:800;text-decoration:none;border:2px solid transparent;font-size:17px;cursor:pointer;font-family:inherit}
+.btn-acento{background:var(--acento);color:#1c1200}
+.btn-acento:hover{background:#ffa040}
+.btn-borde{border-color:#fff;color:#fff}
+.btn-borde:hover{background:rgba(255,255,255,.15)}
+
+/* Secciones */
+section{padding:60px 0}
+section.gris{background:var(--suave)}
+h2{font-size:clamp(26px,4vw,36px);margin:0 0 10px;color:var(--azul-osc);font-weight:800}
+.intro{margin:0 0 32px;max-width:56ch}
+.servicios{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.servicio{background:#fff;border-left:5px solid var(--azul);padding:18px 20px;border-radius:4px}
+section.gris .servicio{background:#fff}
+.servicio h3{margin:0 0 6px;font-size:19px;color:var(--azul-osc)}
+.servicio p{margin:0;font-size:16px}
+.fotos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.foto{aspect-ratio:4/3;background:#d5e0f3;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;color:var(--azul-osc);font-size:15px;overflow:hidden}
+.foto img{width:100%;height:100%;object-fit:cover}
+
+/* Agenda + formulario */
+.agenda{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;background:var(--azul);color:#fff;border-radius:10px;padding:32px}
+.agenda h2{color:#fff}
+.agenda p{margin:0;max-width:44ch;color:#dbe7fb}
+form{display:grid;gap:16px;max-width:620px}
+label{font-weight:600;display:grid;gap:6px}
+input,select,textarea{font:inherit;padding:12px;border:2px solid #b9c8e3;border-radius:6px;background:#fff;color:var(--texto)}
+input:focus,select:focus,textarea:focus{outline:3px solid var(--acento);border-color:var(--azul)}
+textarea{min-height:120px;resize:vertical}
+.fila{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+footer{background:var(--azul-osc);color:#cfdcf4;padding:32px 0;font-size:15px}
+footer a{color:#fff}
+
+@media (max-width:760px){
+  .hamb{display:block}
+  nav{display:none;position:absolute;top:68px;left:0;right:0;background:var(--azul-osc);padding:8px 12px 16px}
+  nav.abierto{display:block}
+  nav ul{flex-direction:column;align-items:stretch}
+  .sub{display:block;position:static;background:transparent;box-shadow:none;padding:0 0 0 14px}
+  .sub a{color:#dbe7fb}
+  .sub a:hover{background:rgba(255,255,255,.15)}
+  .fila{grid-template-columns:1fr}
+  .portada{padding:44px 0 52px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap barra">
+    <a href="#inicio" aria-label="Reparabotnik, inicio"><img src="logo.png" alt="Reparabotnik Servicio técnico"></a>
+    <button class="hamb" id="hamb" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <nav id="menu" aria-label="Menú principal">
+      <ul>
+        <li class="tiene-sub">
+          <a href="#servicios">Servicios ▾</a>
+          <!-- EDITÁ ACÁ los servicios del menú desplegable -->
+          <ul class="sub">
+            <li><a href="#servicios">Reparación de notebooks</a></li>
+            <li><a href="#servicios">Reparación de PC</a></li>
+            <li><a href="#servicios">Redes y Wi-Fi</a></li>
+            <li><a href="#servicios">Instalación de Windows y programas</a></li>
+            <li><a href="#servicios">Electrónica y fuentes</a></li>
+          </ul>
+        </li>
+        <li><a href="#trabajos">Trabajos</a></li>
+        <li><a href="#cotizar">Cotizar</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a class="boton-nav" href="#agendar">Agendar visita</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="portada">
+    <div class="wrap">
+      <h1>Tu equipo, de nuevo funcionando.</h1>
+      <p>Servicio técnico de notebooks, PC, redes y electrónica. Elegí el día y horario de tu visita, o pedí una cotización sin compromiso.</p>
+      <div class="botones">
+        <a class="btn btn-acento" href="#agendar">Agendar visita</a>
+        <a class="btn btn-borde" href="#cotizar">Pedir cotización</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="servicios">
+    <div class="wrap">
+      <h2>Servicios</h2>
+      <p class="intro">Diagnóstico y reparación, con constancia por escrito de cada trabajo.</p>
+      <!-- EDITÁ ACÁ: cambiá, borrá o copiá estos bloques -->
+      <div class="servicios">
+        <div class="servicio"><h3>Notebooks</h3><p>Cambio de pantalla, teclado, batería y limpieza interna.</p></div>
+        <div class="servicio"><h3>PC de escritorio</h3><p>Armado, actualización y reparación de componentes.</p></div>
+        <div class="servicio"><h3>Redes y Wi-Fi</h3><p>Configuración de router, señal débil y cortes de conexión.</p></div>
+        <div class="servicio"><h3>Windows y programas</h3><p>Instalación, recuperación de sistema y eliminación de virus.</p></div>
+        <div class="servicio"><h3>Electrónica y fuentes</h3><p>Diagnóstico y reparación de fuentes y placas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="trabajos" class="gris">
+    <div class="wrap">
+      <h2>Trabajos realizados</h2>
+      <p class="intro">Algunos de los equipos que pasaron por el taller.</p>
+      <!-- Para poner una foto: guardala en esta carpeta y reemplazá el texto por <img src="nombre-de-tu-foto.jpg" alt="Descripción"> -->
+      <div class="fotos">
+        <div class="foto">Foto 1: notebook reparada</div>
+        <div class="foto">Foto 2: limpieza interna</div>
+        <div class="foto">Foto 3: fuente reparada</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="agendar">
+    <div class="wrap">
+      <div class="agenda">
+        <div>
+          <h2>Agendá tu visita técnica</h2>
+          <p>Elegí en el calendario un día y horario disponible. Te llega la confirmación por mail.</p>
+        </div>
+        <!-- PEGÁ ACÁ el link de tu calendario (Google Calendar o Calendly) en lugar de TU_LINK_DE_AGENDA -->
+        <a class="btn btn-acento" href="TU_LINK_DE_AGENDA" target="_blank" rel="noopener">Ver horarios disponibles</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="cotizar" class="gris">
+    <div class="wrap">
+      <h2>Pedí tu cotización</h2>
+      <p class="intro">Contanos qué le pasa a tu equipo y te respondemos con un presupuesto.</p>
+      <!-- Si publicás en Netlify, este formulario te llega solo al panel de Netlify (sección Forms) -->
+      <form name="cotizacion" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="cotizacion">
+        <p hidden><label>No completar: <input name="bot-field"></label></p>
+        <div class="fila">
+          <label>Nombre<input type="text" name="nombre" required autocomplete="name"></label>
+          <label>WhatsApp o teléfono<input type="tel" name="telefono" required autocomplete="tel"></label>
+        </div>
+        <label>Email<input type="email" name="email" autocomplete="email"></label>
+        <label>Tipo de equipo
+          <select name="equipo">
+            <option>Notebook</option>
+            <option>PC de escritorio</option>
+            <option>Red / Wi-Fi</option>
+            <option>Electrónica / fuente</option>
+            <option>Otro</option>
+          </select>
+        </label>
+        <label>¿Qué problema tiene?<textarea name="problema" required></textarea></label>
+        <button class="btn btn-acento" type="submit">Enviar pedido de cotización</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer id="contacto">
+  <div class="wrap">
+    <strong>Reparabotnik · Servicio técnico</strong><br>
+    <!-- Reemplazá estos datos por los tuyos -->
+    WhatsApp: <a href="https://wa.me/54911XXXXXXXX">+54 9 11 XXXX-XXXX</a><br>
+    Zona de atención: TU ZONA<br>
+    Horario: lunes a viernes de 9 a 18 hs
+  </div>
+</footer>
+
+<script>
+  var b=document.getElementById('hamb'), m=document.getElementById('menu');
+  b.addEventListener('click',function(){
+    var a=m.classList.toggle('abierto');
+    b.setAttribute('aria-expanded',a);
+  });
+  m.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){m.classList.remove('abierto');b.setAttribute('aria-expanded','false');}
+  });
+</script>
+</body>
+</html>
